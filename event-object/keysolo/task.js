@@ -22,7 +22,7 @@ class Game {
       const charGiven = this.currentSymbol.textContent.toLowerCase();  // Символ, который дан.
       const charGivenCode = charGiven.charCodeAt();
       const userInput = event.key.toLowerCase();  // Символ, который ввели.
-      if (event.key === 'Shift' || event.key === 'Control' || event.key === 'Alt') {
+      if (['Shift', 'Control', 'Alt'].includes(event.key)) {
         return;
       };
       const userInputCode = userInput.charCodeAt();
