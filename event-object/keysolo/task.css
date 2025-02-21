@@ -11,3 +11,11 @@
   color: #fff;
 }
 
+div.card {
+  height: 200px;
+  width: 600px;
+}
+
+.status_time {
+  margin-top: 30px;
+}

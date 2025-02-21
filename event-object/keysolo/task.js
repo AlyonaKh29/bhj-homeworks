@@ -4,6 +4,7 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
+    this.timerElement = document.getElementById('timer');
 
     this.reset();
 
@@ -16,15 +17,18 @@ class Game {
     this.lossElement.textContent = 0;
   }
 
-  registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода символа вызываем this.success()
-      При неправильном вводе символа - this.fail();
-      DOM-элемент текущего символа находится в свойстве this.currentSymbol.
-     */
+  registerEvents() { // Обработчик клавиш  
+    const pressKey = (event) => {
+      const charGiven = this.currentSymbol.textContent.toLowerCase();  // Символ, который дан.
+      const charGivenCode = charGiven.charCodeAt();
+      const userInput = event.key.toLowerCase();  // Символ, который ввели.
+      if (event.key === 'Shift' || event.key === 'Control' || event.key === 'Alt') {
+        return;
+      };
+      const userInputCode = userInput.charCodeAt();
+      charGivenCode === userInputCode ? this.success() : this.fail();
+    };
+    window.addEventListener('keydown', pressKey);
   }
 
   success() {
@@ -54,22 +58,42 @@ class Game {
 
   setNewWord() {
     const word = this.getWord();
-
     this.renderWord(word);
+    this.startCountdown(word);
   }
+
+  startCountdown(word) {  // Cчётчик. Кол-во секунд равно длине слова или фразы.
+    clearInterval(this.countdown);
+    let seconds = word.length; 
+    this.countdown = setInterval(() => {
+        this.timerElement.textContent = seconds;
+        seconds--;
+        if (seconds < 0) {
+            clearInterval(this.countdown);
+            this.timerElement.textContent = "--";
+            this.fail();
+        }
+    }, 1000);
+}
 
   getWord() {
     const words = [
-        'bob',
-        'awesome',
+        //'bob',
+        //'awesome',
         'netology',
         'hello',
-        'kitty',
+        //'kitty',
         'rock',
-        'youtube',
-        'popcorn',
-        'cinema',
+        //'youtube',
+        //'popcorn',
+        //'cinema',
         'love',
+        'мама',
+        'лес',
+        'пион',
+        'Мой гранат is great',
+        'who is on duty сегодня',
+        'we are the Чемпионы',
         'javascript'
       ],
       index = Math.floor(Math.random() * words.length);
