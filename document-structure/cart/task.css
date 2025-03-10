@@ -9,7 +9,9 @@ body {
 
 .cart__product {
   position: relative;
+  margin-right: 40px;
 }
+
 .cart__product-count {
   position: absolute;
   top: 0;
@@ -88,4 +90,36 @@ body {
 
 .product-shadow {
   position: absolute;
+}
+
+div.remove_products {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 157px;
+  background: green;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+div.remove_products:hover {
+  opacity: 0.8;
+}
+
+.cart__remove {
+  display: none;
+}
+
+.cart__product-remove {
+  position: absolute; 
+  bottom: 10px; 
+  left: 90px;
+}
+
+.icon {
+  width: 25px; 
+  height: auto; 
+  cursor: pointer; 
 }
