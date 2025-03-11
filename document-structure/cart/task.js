@@ -2,7 +2,8 @@ const products = Array.from(document.getElementsByClassName('product'));
 const cartProducts = document.querySelector('.cart__products');
 const cart = document.querySelector('.cart');
 cart.classList.add('cart__remove');
-productAddToCart ();
+productAddToCart();
+cartRemoveProducts();
 
 function increase(element, value) {  // Увеличить количество товара (нажатие на кнопку "плюс")
     const inc = element.querySelector('.product__quantity-control_inc');
@@ -41,8 +42,7 @@ function productAddToCart () {  // Добавление товара в корз
                 addFirstProduct(dataID, imgAttr, value.textContent);
             };
             value.textContent = 1;
-            productRemove();
-            cartRemoveProducts();  
+            productRemove(); 
         })    
     })    
 }
@@ -57,15 +57,14 @@ function addFirstProduct(dataID, imgAttr, value) {  // Добавление в �
 }
 
 function productRemove() {  // Нажатие на кнопку "Удалить товар из корзины"
-    document.querySelectorAll('.cart__product-remove').forEach((item) => {
-        item.addEventListener('click', () => {
-            const parent = item.closest('div.cart__product');
-            parent.remove();
-            if (document.querySelectorAll('.cart__product-remove').length == 0) {
-                cart.classList.add('cart__remove'); // Корзина удаляется, если пустая
-            }
-        })
-    });
+    const newProduct = cartProducts.lastElementChild;
+    const elementRemove = newProduct.querySelector('.cart__product-remove');
+    elementRemove.addEventListener('click', () => {
+        newProduct.remove();
+        if (!document.querySelector('.cart__product')) {
+            cart.classList.add('cart__remove'); // Корзина удаляется, если пустая
+        }
+    })
 }
 
 function cartRemoveProducts() {  // Нажатие на кнопку "Очистить корзину"
