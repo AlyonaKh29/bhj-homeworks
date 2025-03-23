@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = document.getElementById('user_id');
     const welcome = document.getElementById('welcome');
     
-    if (window.localStorage.getItem('user')) {
+    if (localStorage.getItem('user')) {
         showWelcome();
     } else {
         signinBtn.addEventListener('click', (event) => {
